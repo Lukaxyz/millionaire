@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="style.css">
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+ 
+
+	<title>
+		Millionaire
+	</title>
+
+
+</head>
+<body>
+
+
+
+<div class="container" id="glavna" >
+	<h1 class="naslov">Who Wants To Be A Millionaire </h1>
+	<div class="hide" id="glavna2">
+
+		
+		<div id="pitanja">
+			<button type="button" class="noclick btn btn-primary btn-sm col-sm-12 col-xs-12" id="xd">
+			<input type="button" class="noclick btn btn-primary btn-sm col-sm-6 col-xs-12" id="a3" value="Pitanje 1: ">
+			<b id="num1"></b>
+			<b id="operator"></b>
+			<b id="num2"></b></button>
+
+			<input type="button" class="btn btn-primary btn-sm col-sm-6 col-xs-12" id="a" >
+			<input type="button" class="btn btn-primary btn-sm col-sm-6 col-xs-12" id="b" >
+			<input type="button" class="btn btn-primary btn-sm col-sm-6 col-xs-12" id="c" >
+			<input type="button" class="btn btn-primary btn-sm col-sm-6 col-xs-12" id="d" >
+  		</div>
+  
+
+  		<div id="novac">
+  			<ul style="list-style: none;">
+  				<li id="15"><b>Pitanje 15 - 1,000,000 KM</b></li>
+  				<li id="14">Pitanje 14 - 500,000 KM</li>
+  				<li id="13">Pitanje 13 - 250,000 KM</li>
+  				<li id="12">Pitanje 12 - 125,000 KM</li>
+  				<li id="11">Pitanje 11 - 75,000 KM</li>
+  				<li id="10"><b>Pitanje 10 - 32,000 KM</b></li>
+  				<li id="9">Pitanje 9 - 16,000 KM</li>
+  				<li id="8">Pitanje 8 - 8,000 KM</li>
+  				<li id="7">Pitanje 7 - 4,000 KM</li>
+  				<li id="6">Pitanje 6 - 2,000 KM</li>
+  				<li id="5"><b>Pitanje 5 - 1,000 KM</b></li>
+  				<li id="4">Pitanje 4 - 750 KM</li>
+  				<li id="3">Pitanje 3 - 500 KM</li>
+  				<li id="2">Pitanje 2 - 250 KM</li>
+  				<li id="1">Pitanje 1 - 100 KM</li>
+
+  			</ul>
+
+
+  			<input type="button" class="noclick btn btn-primary btn-sm col-sm-6 col-xs-12" id="a1" value="Trenutni novac">
+  			<input type="button" class="noclick btn btn-primary btn-sm col-sm-6 col-xs-12" id="a2" value="Zagarantovani novac">
+  		</div>
+  		</div>
+  		<div class="container" id="controls">
+			<button onclick="ime(); Q1();" type="button" class="btn btn-primary btn-sm" id="pocetak" >Započni Igru!</button>
+			<button onclick="polapola()" type="button"class="hide btn btn-primary btn-sm" id="joker">50/50</button>
+			<button type="button"class="hide btn btn-primary btn-sm" id="joker2">Pitaj Publiku</button>
+			<button onclick="Q2()" type="button"class="hide btn btn-primary btn-sm" id="pocetak2"> Odustani </button>
+
+  			<button type="button" class="btn btn-primary btn-sm" id="nazadmalo"><a href="home.html">Vrati se na glavni meni</a></button>
+  		</div>
+</div>
+<br>
+<script type="text/javascript">
+	
+	
+	var i = 0;
+	var cash=0;
+	var guaranteed=0;
+	var operators = ['+', '-', '*', '/'];
+	function Q2(){
+
+		alert("Osvojili ste: "+cash+" KM")
+		location.reload();
+	}
+	function ime(){
+		var name = prompt("Unesite Vaše Ime","Ime");
+		alert("Dobrodošao "+name);
+
+	}
+	
+
+
+
+	function Q1(){
+		document.getElementById('glavna2').classList.remove('hide');
+		document.getElementById('pocetak').classList.add('hide');
+		document.getElementById('pocetak2').classList.remove('hide');
+		document.getElementById('joker').classList.remove('hide');
+		document.getElementById('joker2').classList.remove('hide');
+		
+		num1=document.getElementById("num1");
+		num2=document.getElementById("num2");
+		op=document.getElementById("operator");
+		rnum1 = Math.floor((Math.random()*10))+((i*5)+1);
+		rnum2 = Math.floor((Math.random()*10))+((i*5)+1);
+		rop = operators[Math.floor(Math.random()*4)];
+		/* Ideja uzeta sa stackoverflow-a*/
+		num1.innerHTML=rnum1;
+		num2.innerHTML=rnum2;
+		op.innerHTML=rop;   
+		correct = eval(rnum1+rop+rnum2);
+		if (Number.isInteger(correct))
+		{
+		var randomValues= [];
+		var correctValue = correct;
+		randomValues.push(correctValue);
+		var currentValue;
+		while(randomValues.length <4){
+			rop2 = operators[Math.floor(Math.random()*2)];
+			if(rop2=="+"){
+			currentValue = correct+Math.floor(Math.random()*10+(i*2));
+			}
+			else {
+			currentValue = correct-Math.floor(Math.random()*10+(i*2));
+			}
+		if(randomValues.indexOf(currentValue)<0) {
+			randomValues.push(currentValue);
+			}
+		console.log(randomValues);
+
+		var currentIndex=randomValues.length, randomIndex, temporaryValue;
+
+		while(0 !== currentIndex){
+			randomIndex = Math.floor(Math.random()*currentIndex);
+			currentIndex -=1;
+
+			temporaryValue = randomValues[currentIndex];
+    		randomValues[currentIndex] = randomValues[randomIndex];
+    		randomValues[randomIndex] = temporaryValue;
+		}
+
+		document.getElementById("a").value=randomValues[0];
+		document.getElementById("b").value=randomValues[1];
+		document.getElementById("c").value=randomValues[2];
+		document.getElementById("d").value=randomValues[3];
+
+
+		}
+		}
+		else {
+			Q1();
+		}
+		}
+	function polapola(){
+		var a = document.getElementById('a').value;
+		var b = document.getElementById('b').value;
+		var c = document.getElementById('c').value;
+		var d = document.getElementById('d').value;
+		var i=0;
+		if(a!=correct){
+			document.getElementById('a').value="";
+			i=i+1;
+		}
+		if(d!=correct){
+			document.getElementById('d').value="";
+			i=i+1;
+		}
+
+		if (i==2){
+			document.getElementById('joker').classList.add('noclick','red');
+			return;
+		}
+		if(c!=correct){
+			document.getElementById('c').value="";
+			i=i+1;
+		}
+		if (i==2){
+			document.getElementById('joker').classList.add('noclick','red');
+			return;
+		}
+		if(b!=correct){
+			document.getElementById('b').value="";
+			i=i+1;
+		}
+		if (i==2){
+			document.getElementById('joker').classList.add('noclick','red');
+			return;
+		}
+
+
+
+
+	}
+
+
+				$("input.btn").on("click", function() {
+		    var selectedValue = parseInt($(this).val(), 10);
+
+		    if(selectedValue === correct) {
+		      alert("Tačan odgovor!");
+		      i=i+1;
+		      		if (i==0){cash=0; guaranteed=0};
+					if (i==1){cash=100; guaranteed=0};
+					if (i==2){cash=250; guaranteed=0};
+					if (i==3){cash=500; guaranteed=0};
+					if (i==4){cash=750; guaranteed=0};
+					if (i==5){cash=1000; guaranteed=1000;};
+					if (i==6){cash=2000; guaranteed=1000};
+					if (i==7){cash=4000; guaranteed=1000};
+					if (i==8){cash=8000; guaranteed=1000};
+					if (i==9){cash=16000; guaranteed=1000};
+					if (i==10){cash=32000; guaranteed=32000;};
+					if (i==11){cash=75000; guaranteed=32000;};
+					if (i==12){cash=125000; guaranteed=32000;};
+					if (i==13){cash=250000; guaranteed=32000;};
+					if (i==14){cash=500000; guaranteed=32000;};
+					if (i==15)
+						{cash=1000000; guaranteed=1000000;
+						alert("Čestitamo, osvojili ste 1,000,000 KM!")
+						location.reload();};
+
+				document.getElementById('a3').setAttribute('value', "Pitanje " + (i+1) + ": ");
+				document.getElementById('a1').setAttribute('value', "Trenutni novac = " + cash);
+				document.getElementById('a2').setAttribute('value', "Zagarantovani novac = " + guaranteed);
+			    Q1();
+		     
+		    } else {
+		
+		      alert("Pogrešan odgovor!");
+		      alert("Osvojili ste " + guaranteed + " KM");
+		      location.reload();
+		    }
+		 });
+
+
+</script>
+
+</body>
+</html>
+
